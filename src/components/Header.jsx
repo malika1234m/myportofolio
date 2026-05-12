@@ -14,10 +14,16 @@ function Header() {
             dedicated to crafting innovative solutions and turning complex challenges into elegant code.
             I love competitive programming and building seamless user experiences.
           </p>
-          <a href="#achievements" className="btn-primary">
-            VIEW ACHIEVEMENTS
-            <span>→</span>
-          </a>
+          <div className="hero-actions">
+            <a href="#achievements" className="btn-primary">
+              VIEW ACHIEVEMENTS
+              <span>→</span>
+            </a>
+            <a href="/my-cv.pdf" download="Malika_Nishnatha_CV.pdf" className="btn-secondary">
+              DOWNLOAD CV
+              <span>↓</span>
+            </a>
+          </div>
         </div>
         <div className="hero-image">
           <div className="profile-wrapper">

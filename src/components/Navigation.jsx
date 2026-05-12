@@ -52,6 +52,9 @@ function Navigation() {
           <li><a href="#education" className={active === 'education' ? 'active' : ''}>Education</a></li>
           <li><a href="#contact" className={active === 'contact' ? 'active' : ''}>Contact</a></li>
           <li>
+            <a href="/my-cv.pdf" download="Malika_Nishnatha_CV.pdf" className="nav-cv-btn">CV ↓</a>
+          </li>
+          <li>
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               {theme === 'dark' ? '🌙' : '☀️'}
             </button>
