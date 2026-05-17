@@ -3,7 +3,7 @@ function Education() {
   const education = [
     {
       id: 1,
-      degree: "Bachelor of Science (Hons) in Information Systems",
+      degree: "Bachelor of Science (Hons) in Computer Science",
       institution: "University of Colombo School of Computing",
       period: "2023 - Present",
       status: "Currently Studying",
