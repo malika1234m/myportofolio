@@ -1,9 +1,18 @@
-// Navigation component with scroll spy highlighting
+// Navigation component with scroll spy highlighting and mobile hamburger menu
 import { useEffect, useState } from 'react'
 
 function Navigation() {
   const [active, setActive] = useState('home')
   const [theme, setTheme] = useState('light')
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  // Close menu when clicking outside the nav
+  useEffect(() => {
+    if (!menuOpen) return
+    const close = (e) => { if (!e.target.closest('nav')) setMenuOpen(false) }
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [menuOpen])
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('section[id]'))
@@ -39,20 +48,24 @@ function Navigation() {
     setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
   }
 
+  function closeMenu() {
+    setMenuOpen(false)
+  }
+
   return (
     <nav>
       <div className="nav-container">
         <div className="logo">
           <span className="signature">Malika</span>
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" className={active === 'home' ? 'active' : ''}>Home</a></li>
-          <li><a href="#about" className={active === 'about' ? 'active' : ''}>About</a></li>
-          <li><a href="#achievements" className={active === 'achievements' ? 'active' : ''}>Achievements</a></li>
-          <li><a href="#education" className={active === 'education' ? 'active' : ''}>Education</a></li>
-          <li><a href="#contact" className={active === 'contact' ? 'active' : ''}>Contact</a></li>
+        <ul className={`nav-links${menuOpen ? ' open' : ''}`}>
+          <li><a href="#home" className={active === 'home' ? 'active' : ''} onClick={closeMenu}>Home</a></li>
+          <li><a href="#about" className={active === 'about' ? 'active' : ''} onClick={closeMenu}>About</a></li>
+          <li><a href="#achievements" className={active === 'achievements' ? 'active' : ''} onClick={closeMenu}>Achievements</a></li>
+          <li><a href="#education" className={active === 'education' ? 'active' : ''} onClick={closeMenu}>Education</a></li>
+          <li><a href="#contact" className={active === 'contact' ? 'active' : ''} onClick={closeMenu}>Contact</a></li>
           <li>
-            <a href="/my-cv.pdf" download="Malika_Nishnatha_CV.pdf" className="nav-cv-btn">CV ↓</a>
+            <a href="/my-cv.pdf" download="Malika_Nishnatha_CV.pdf" className="nav-cv-btn" onClick={closeMenu}>CV ↓</a>
           </li>
           <li>
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
@@ -60,6 +73,16 @@ function Navigation() {
             </button>
           </li>
         </ul>
+        <button
+          className={`hamburger${menuOpen ? ' active' : ''}`}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
   );
